@@ -2,7 +2,7 @@
  * @name Rose Glass
  * @author ElevenSoul
  * @description Liquid glass Discord in dusty rose: a floating glass dock and sidebar, Mac traffic lights, frosted message bubbles and springy animations. Follows Discord's light/dark setting. Updates itself.
- * @version 2.1.0
+ * @version 2.2.0
  * @source https://github.com/ElevenSoul/rose-glass
  */
 
@@ -30,6 +30,9 @@
 
   /* Frosted message bubbles: on or off */
   --tahoe-bubbles: on;
+
+  /* Mac-style icons for header and panel buttons: on or off */
+  --tahoe-icons: on;
 
   /* Panel roundness and the gap around panels */
   --tahoe-radius: 24px;
