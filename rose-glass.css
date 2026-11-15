@@ -3,7 +3,7 @@
  * @author ElevenSoul
  * @source https://github.com/ElevenSoul/rose-glass
  * @description Liquid glass Discord in dusty rose: a floating glass dock and sidebar, Mac traffic lights, frosted message bubbles and springy animations. Follows Discord's light/dark setting.
- * @version 2.2.2
+ * @version 2.3.0
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap");
@@ -954,47 +954,134 @@ textarea[class*="textArea_"]:focus,
 }
 
 /* ==========================================================================
-   Mac-style icons
-   Discord's icons are hidden and redrawn as thin, rounded line icons. They use
-   each button's own color, so hover states and "muted red" still work.
+   Mac-style animated icons
+   Discord's icons on these buttons are hidden and redrawn as outline icons
+   that fill in and animate on hover (or while switched on). They use each
+   button's own color, so hover states and "muted red" still work.
    Set --tahoe-icons: off in your settings to keep Discord's icons.
    ========================================================================== */
 :root {
   --tahoe-icon-threads: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M4.5 5h11a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3h-1A1.5 1.5 0 0 1 3 12.5v-6A1.5 1.5 0 0 1 4.5 5z%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M19.5 9.5h.5A1.5 1.5 0 0 1 21.5 11v5a1.5 1.5 0 0 1-1.5 1.5h-.5V20l-3-2.5H12%22/%3E%3C/svg%3E");
+  --tahoe-icon-threads-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22M4.5 5h11a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3h-1A1.5 1.5 0 0 1 3 12.5v-6A1.5 1.5 0 0 1 4.5 5z%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M19.5 9.5h.5A1.5 1.5 0 0 1 21.5 11v5a1.5 1.5 0 0 1-1.5 1.5h-.5V20l-3-2.5H12%22/%3E%3C/svg%3E");
   --tahoe-icon-bell: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M6 16.5v-5a6 6 0 0 1 12 0v5l1.5 2h-15z%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M10 20.5a2 2 0 0 0 4 0%22/%3E%3C/svg%3E");
+  --tahoe-icon-bell-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22M6 16.5v-5a6 6 0 0 1 12 0v5l1.5 2h-15z%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M10 20.5a2 2 0 0 0 4 0%22/%3E%3C/svg%3E");
   --tahoe-icon-pin: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M9 3.5h6l-.8 5.2 3.3 3.3v2H6.5v-2l3.3-3.3z%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M12 14v6.5%22/%3E%3C/svg%3E");
+  --tahoe-icon-pin-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22M9 3.5h6l-.8 5.2 3.3 3.3v2H6.5v-2l3.3-3.3z%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M12 14v6.5%22/%3E%3C/svg%3E");
   --tahoe-icon-members: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Ccircle stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 cx=%229%22 cy=%228%22 r=%223.5%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M2.5 20a6.5 6.5 0 0 1 13 0%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8%22/%3E%3C/svg%3E");
+  --tahoe-icon-members-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Ccircle fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 cx=%229%22 cy=%228%22 r=%223.5%22/%3E%3Cpath fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22M2.5 20a6.5 6.5 0 0 1 13 0z%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8%22/%3E%3C/svg%3E");
   --tahoe-icon-inbox: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M3.5 13.5 6 5h12l2.5 8.5V19h-17z%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M3.5 13.5H8l1.5 2.5h5l1.5-2.5h4.5%22/%3E%3C/svg%3E");
+  --tahoe-icon-inbox-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cmask id=%22m%22%3E%3Crect width=%2224%22 height=%2224%22 fill=%22white%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M3.5 13.5H8l1.5 2.5h5l1.5-2.5h4.5%22/%3E%3C/mask%3E%3Cpath fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 mask=%22url%28%23m%29%22 d=%22M3.5 13.5 6 5h12l2.5 8.5V19h-17z%22/%3E%3C/svg%3E");
   --tahoe-icon-help: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Ccircle stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 cx=%2212%22 cy=%2212%22 r=%229%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M9.6 9.4a2.5 2.5 0 1 1 3.6 2.3c-.7.3-1.2 1-1.2 1.8v.5%22/%3E%3Ccircle cx=%2212%22 cy=%2217%22 r=%221%22 fill=%22black%22/%3E%3C/svg%3E");
+  --tahoe-icon-help-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cmask id=%22m%22%3E%3Crect width=%2224%22 height=%2224%22 fill=%22white%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 fill=%22none%22 d=%22M9.6 9.4a2.5 2.5 0 1 1 3.6 2.3c-.7.3-1.2 1-1.2 1.8v.5%22/%3E%3Ccircle cx=%2212%22 cy=%2217%22 r=%221.1%22 fill=%22black%22/%3E%3C/mask%3E%3Ccircle fill=%22black%22 mask=%22url%28%23m%29%22 cx=%2212%22 cy=%2212%22 r=%229.8%22/%3E%3C/svg%3E");
   --tahoe-icon-phone: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M6.5 3.5h2.2l1.6 4.2-2 1.5a10.5 10.5 0 0 0 6.5 6.5l1.5-2 4.2 1.6v2.2a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z%22/%3E%3C/svg%3E");
+  --tahoe-icon-phone-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22M6.5 3.5h2.2l1.6 4.2-2 1.5a10.5 10.5 0 0 0 6.5 6.5l1.5-2 4.2 1.6v2.2a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z%22/%3E%3C/svg%3E");
   --tahoe-icon-video: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Crect stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 x=%222.5%22 y=%226.5%22 width=%2213%22 height=%2211%22 rx=%222.5%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22m15.5 10.5 6-3.5v10l-6-3.5%22/%3E%3C/svg%3E");
+  --tahoe-icon-video-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Crect fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 x=%222.5%22 y=%226.5%22 width=%2213%22 height=%2211%22 rx=%222.5%22/%3E%3Cpath fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22m15.5 10.5 6-3.5v10l-6-3.5z%22/%3E%3C/svg%3E");
   --tahoe-icon-profile: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Ccircle stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 cx=%2212%22 cy=%228.5%22 r=%224%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M4.5 20.5a7.5 7.5 0 0 1 15 0%22/%3E%3C/svg%3E");
+  --tahoe-icon-profile-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Ccircle fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 cx=%2212%22 cy=%228.5%22 r=%224%22/%3E%3Cpath fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 d=%22M4.5 20.5a7.5 7.5 0 0 1 15 0z%22/%3E%3C/svg%3E");
   --tahoe-icon-mic: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Crect stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 x=%229%22 y=%223%22 width=%226%22 height=%2211.5%22 rx=%223%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21%22/%3E%3C/svg%3E");
-  --tahoe-icon-mic-off: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Crect stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 x=%229%22 y=%223%22 width=%226%22 height=%2211.5%22 rx=%223%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 d=%22M4 3.5 20 20.5%22/%3E%3C/svg%3E");
+  --tahoe-icon-mic-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Crect fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 x=%229%22 y=%223%22 width=%226%22 height=%2211.5%22 rx=%223%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21%22/%3E%3C/svg%3E");
+  --tahoe-icon-mic-off: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cmask id=%22g%22%3E%3Crect width=%2224%22 height=%2224%22 fill=%22white%22/%3E%3Cpath stroke=%22black%22 stroke-width=%224.6%22 stroke-linecap=%22round%22 d=%22M4 3.5 20 20.5%22/%3E%3C/mask%3E%3Cg mask=%22url%28%23g%29%22%3E%3Crect stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 x=%229%22 y=%223%22 width=%226%22 height=%2211.5%22 rx=%223%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21%22/%3E%3C/g%3E%3Cpath stroke=%22black%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 d=%22M4 3.5 20 20.5%22/%3E%3C/svg%3E");
+  --tahoe-icon-mic-off-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cmask id=%22g%22%3E%3Crect width=%2224%22 height=%2224%22 fill=%22white%22/%3E%3Cpath stroke=%22black%22 stroke-width=%224.6%22 stroke-linecap=%22round%22 d=%22M4 3.5 20 20.5%22/%3E%3C/mask%3E%3Cg mask=%22url%28%23g%29%22%3E%3Crect fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 x=%229%22 y=%223%22 width=%226%22 height=%2211.5%22 rx=%223%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21%22/%3E%3C/g%3E%3Cpath stroke=%22black%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 d=%22M4 3.5 20 20.5%22/%3E%3C/svg%3E");
   --tahoe-icon-headphones: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M4 15.5v-3.5a8 8 0 0 1 16 0v3.5%22/%3E%3Crect stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 x=%223%22 y=%2214%22 width=%224.5%22 height=%227%22 rx=%222%22/%3E%3Crect stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 x=%2216.5%22 y=%2214%22 width=%224.5%22 height=%227%22 rx=%222%22/%3E%3C/svg%3E");
-  --tahoe-icon-headphones-off: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M4 15.5v-3.5a8 8 0 0 1 16 0v3.5%22/%3E%3Crect stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 x=%223%22 y=%2214%22 width=%224.5%22 height=%227%22 rx=%222%22/%3E%3Crect stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 x=%2216.5%22 y=%2214%22 width=%224.5%22 height=%227%22 rx=%222%22/%3E%3Cpath stroke=%22black%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 d=%22M4 3.5 20 20.5%22/%3E%3C/svg%3E");
+  --tahoe-icon-headphones-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M4 15.5v-3.5a8 8 0 0 1 16 0v3.5%22/%3E%3Crect fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 x=%223%22 y=%2214%22 width=%224.5%22 height=%227%22 rx=%222%22/%3E%3Crect fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 x=%2216.5%22 y=%2214%22 width=%224.5%22 height=%227%22 rx=%222%22/%3E%3C/svg%3E");
+  --tahoe-icon-headphones-off: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cmask id=%22g%22%3E%3Crect width=%2224%22 height=%2224%22 fill=%22white%22/%3E%3Cpath stroke=%22black%22 stroke-width=%224.6%22 stroke-linecap=%22round%22 d=%22M4 3.5 20 20.5%22/%3E%3C/mask%3E%3Cg mask=%22url%28%23g%29%22%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M4 15.5v-3.5a8 8 0 0 1 16 0v3.5%22/%3E%3Crect stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 x=%223%22 y=%2214%22 width=%224.5%22 height=%227%22 rx=%222%22/%3E%3Crect stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 x=%2216.5%22 y=%2214%22 width=%224.5%22 height=%227%22 rx=%222%22/%3E%3C/g%3E%3Cpath stroke=%22black%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 d=%22M4 3.5 20 20.5%22/%3E%3C/svg%3E");
+  --tahoe-icon-headphones-off-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cmask id=%22g%22%3E%3Crect width=%2224%22 height=%2224%22 fill=%22white%22/%3E%3Cpath stroke=%22black%22 stroke-width=%224.6%22 stroke-linecap=%22round%22 d=%22M4 3.5 20 20.5%22/%3E%3C/mask%3E%3Cg mask=%22url%28%23g%29%22%3E%3Cpath stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 d=%22M4 15.5v-3.5a8 8 0 0 1 16 0v3.5%22/%3E%3Crect fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 x=%223%22 y=%2214%22 width=%224.5%22 height=%227%22 rx=%222%22/%3E%3Crect fill=%22black%22 stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 x=%2216.5%22 y=%2214%22 width=%224.5%22 height=%227%22 rx=%222%22/%3E%3C/g%3E%3Cpath stroke=%22black%22 stroke-width=%221.8%22 stroke-linecap=%22round%22 d=%22M4 3.5 20 20.5%22/%3E%3C/svg%3E");
   --tahoe-icon-gear: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Ccircle stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 cx=%2212%22 cy=%2212%22 r=%226%22/%3E%3Ccircle stroke=%22black%22 stroke-width=%221.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 fill=%22none%22 cx=%2212%22 cy=%2212%22 r=%222.4%22/%3E%3Cpath stroke=%22black%22 stroke-width=%222.6%22 d=%22M12 2.8v3.4M12 17.8v3.4M2.8 12h3.4M17.8 12h3.4M5.5 5.5l2.4 2.4M16.1 16.1l2.4 2.4M5.5 18.5l2.4-2.4M16.1 7.9l2.4-2.4%22/%3E%3C/svg%3E");
+  --tahoe-icon-gear-fill: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22black%22 fill-rule=%22evenodd%22 d=%22M12 5.2a6.8 6.8 0 1 1 0 13.6 6.8 6.8 0 1 1 0-13.6zM12 9.4a2.6 2.6 0 1 0 0 5.2 2.6 2.6 0 1 0 0-5.2z%22/%3E%3Cpath stroke=%22black%22 stroke-width=%222.6%22 d=%22M12 2.8v3.4M12 17.8v3.4M2.8 12h3.4M17.8 12h3.4M5.5 5.5l2.4 2.4M16.1 16.1l2.4 2.4M5.5 18.5l2.4-2.4M16.1 7.9l2.4-2.4%22/%3E%3C/svg%3E");
+  --tahoe-rose: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%226 4 36 39%22%3E%3Cdefs%3E%3ClinearGradient id=%22petal%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23f2b3c7%22/%3E%3Cstop offset=%221%22 stop-color=%22%23b0607e%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22back%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23d58aa4%22/%3E%3Cstop offset=%221%22 stop-color=%22%238a4664%22/%3E%3C/linearGradient%3E%3CradialGradient id=%22bud%22 cx=%22.5%22 cy=%22.35%22 r=%22.7%22%3E%3Cstop offset=%220%22 stop-color=%22%23c97391%22/%3E%3Cstop offset=%221%22 stop-color=%22%237d3b58%22/%3E%3C/radialGradient%3E%3ClinearGradient id=%22leaf%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23a3c8ac%22/%3E%3Cstop offset=%221%22 stop-color=%22%234f7d63%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M24 30c0 4-.4 7.4.6 11%22 stroke=%22%235f8a6e%22 stroke-width=%222.2%22 stroke-linecap=%22round%22 fill=%22none%22/%3E%3Cpath d=%22M24.3 37c-1.1-4-4.9-6.3-9-6 .9 3.9 4.6 6.7 9 6z%22 fill=%22url%28%23leaf%29%22/%3E%3Cpath d=%22M24.5 34.6c1.4-3.3 4.9-4.9 8.4-4.2-1.2 3.3-4.7 5-8.4 4.2z%22 fill=%22url%28%23leaf%29%22/%3E%3Cpath d=%22M12 17.5c1.4-6.4 6.3-10.6 12-10.6s10.6 4.2 12 10.6L35 24H13z%22 fill=%22url%28%23back%29%22/%3E%3Cpath d=%22M16.8 17c.6-5 3.6-8 7.2-8s6.6 3 7.2 8c-2.2 2-4.6 3-7.2 3s-5-1-7.2-3z%22 fill=%22url%28%23bud%29%22/%3E%3Cpath d=%22M19.2 16.3c.9-3 2.7-4.7 4.8-4.7s3.9 1.7 4.8 4.7c-1.5 1-3.1 1.5-4.8 1.5s-3.3-.5-4.8-1.5z%22 fill=%22%23b5617f%22/%3E%3Cpath d=%22M21.6 14.6c.6-1.3 1.4-2 2.4-2%22 stroke=%22%23f7c9d7%22 stroke-opacity=%22.6%22 stroke-width=%22.8%22 stroke-linecap=%22round%22 fill=%22none%22/%3E%3Cpath d=%22M11 16.5c0 9.4 5.6 15.2 13 15.2S37 25.9 37 16.5c-3.6 3.1-8.2 4.7-13 4.7s-9.4-1.6-13-4.7z%22 fill=%22url%28%23petal%29%22/%3E%3Cpath d=%22M11 16.5c2.7 2.3 5.8 3.7 9.3 4.3-1.5 4.7-.5 8.6 2.4 10.9C15.6 30.9 11 25 11 16.5z%22 fill=%22%23dc94ad%22/%3E%3Cpath d=%22M37 16.5c-2.7 2.3-5.8 3.7-9.3 4.3 1.5 4.7.5 8.6-2.4 10.9C32.4 30.9 37 25 37 16.5z%22 fill=%22%23c4708f%22/%3E%3Cpath d=%22M14.4 20.8c1.5 3.3 4 5.7 7.3 6.7%22 stroke=%22%23fff%22 stroke-opacity=%22.38%22 stroke-width=%22.9%22 stroke-linecap=%22round%22 fill=%22none%22/%3E%3C/svg%3E");
 }
 
 @container style(--tahoe-icons: on) {
-  [aria-label="Threads" i] svg { --tahoe-icon: var(--tahoe-icon-threads); }
-  [aria-label^="Notification Settings" i] svg { --tahoe-icon: var(--tahoe-icon-bell); }
+  [aria-label="Threads" i] svg {
+    --tahoe-icon: var(--tahoe-icon-threads);
+    --tahoe-icon-on: var(--tahoe-icon-threads-fill);
+    --tahoe-icon-anim: tahoe-ic-hop;
+    transform-origin: 50% 50%;
+  }
+  [aria-label^="Notification Settings" i] svg {
+    --tahoe-icon: var(--tahoe-icon-bell);
+    --tahoe-icon-on: var(--tahoe-icon-bell-fill);
+    --tahoe-icon-anim: tahoe-ic-ring;
+    transform-origin: 50% 15%;
+  }
   [aria-label="Pinned Messages" i] svg,
-  [aria-label="Pins" i] svg { --tahoe-icon: var(--tahoe-icon-pin); }
-  [aria-label$="Member List" i] svg { --tahoe-icon: var(--tahoe-icon-members); }
-  [aria-label="Inbox" i] svg { --tahoe-icon: var(--tahoe-icon-inbox); }
-  [aria-label="Help" i] svg { --tahoe-icon: var(--tahoe-icon-help); }
-  [aria-label="Start Voice Call" i] svg { --tahoe-icon: var(--tahoe-icon-phone); }
-  [aria-label="Start Video Call" i] svg { --tahoe-icon: var(--tahoe-icon-video); }
-  [aria-label$="User Profile" i] svg { --tahoe-icon: var(--tahoe-icon-profile); }
-  [aria-label="Mute" i] svg { --tahoe-icon: var(--tahoe-icon-mic); }
+  [aria-label="Pins" i] svg {
+    --tahoe-icon: var(--tahoe-icon-pin);
+    --tahoe-icon-on: var(--tahoe-icon-pin-fill);
+    --tahoe-icon-anim: tahoe-ic-bob;
+    transform-origin: 50% 90%;
+  }
+  [aria-label$="Member List" i] svg {
+    --tahoe-icon: var(--tahoe-icon-members);
+    --tahoe-icon-on: var(--tahoe-icon-members-fill);
+    --tahoe-icon-anim: tahoe-ic-hop;
+    transform-origin: 50% 50%;
+  }
+  [aria-label="Inbox" i] svg {
+    --tahoe-icon: var(--tahoe-icon-inbox);
+    --tahoe-icon-on: var(--tahoe-icon-inbox-fill);
+    --tahoe-icon-anim: tahoe-ic-dip;
+    transform-origin: 50% 50%;
+  }
+  [aria-label="Help" i] svg {
+    --tahoe-icon: var(--tahoe-icon-help);
+    --tahoe-icon-on: var(--tahoe-icon-help-fill);
+    --tahoe-icon-anim: tahoe-ic-tilt;
+    transform-origin: 50% 60%;
+  }
+  [aria-label="Start Voice Call" i] svg {
+    --tahoe-icon: var(--tahoe-icon-phone);
+    --tahoe-icon-on: var(--tahoe-icon-phone-fill);
+    --tahoe-icon-anim: tahoe-ic-jiggle;
+    transform-origin: 50% 50%;
+  }
+  [aria-label="Start Video Call" i] svg {
+    --tahoe-icon: var(--tahoe-icon-video);
+    --tahoe-icon-on: var(--tahoe-icon-video-fill);
+    --tahoe-icon-anim: tahoe-ic-slide;
+    transform-origin: 50% 50%;
+  }
+  [aria-label$="User Profile" i] svg {
+    --tahoe-icon: var(--tahoe-icon-profile);
+    --tahoe-icon-on: var(--tahoe-icon-profile-fill);
+    --tahoe-icon-anim: tahoe-ic-hop;
+    transform-origin: 50% 50%;
+  }
+  [aria-label="Mute" i] svg {
+    --tahoe-icon: var(--tahoe-icon-mic);
+    --tahoe-icon-on: var(--tahoe-icon-mic-fill);
+    --tahoe-icon-anim: tahoe-ic-pop;
+    transform-origin: 50% 50%;
+  }
+  [aria-label="Deafen" i] svg {
+    --tahoe-icon: var(--tahoe-icon-headphones);
+    --tahoe-icon-on: var(--tahoe-icon-headphones-fill);
+    --tahoe-icon-anim: tahoe-ic-wobble;
+    transform-origin: 50% 30%;
+  }
+  [aria-label="User Settings" i] svg {
+    --tahoe-icon: var(--tahoe-icon-gear);
+    --tahoe-icon-on: var(--tahoe-icon-gear-fill);
+    --tahoe-icon-anim: tahoe-ic-turn;
+    transform-origin: 50% 50%;
+  }
   [aria-label="Unmute" i] svg,
-  [aria-label="Mute" i][aria-checked="true"] svg { --tahoe-icon: var(--tahoe-icon-mic-off); }
-  [aria-label="Deafen" i] svg { --tahoe-icon: var(--tahoe-icon-headphones); }
+  [aria-label="Mute" i][aria-checked="true"] svg {
+    --tahoe-icon: var(--tahoe-icon-mic-off);
+    --tahoe-icon-on: var(--tahoe-icon-mic-off-fill);
+    --tahoe-icon-anim: tahoe-ic-shake;
+    animation: tahoe-ic-shake 0.45s ease-out;
+  }
   [aria-label="Undeafen" i] svg,
-  [aria-label="Deafen" i][aria-checked="true"] svg { --tahoe-icon: var(--tahoe-icon-headphones-off); }
-  [aria-label="User Settings" i] svg { --tahoe-icon: var(--tahoe-icon-gear); }
+  [aria-label="Deafen" i][aria-checked="true"] svg {
+    --tahoe-icon: var(--tahoe-icon-headphones-off);
+    --tahoe-icon-on: var(--tahoe-icon-headphones-off-fill);
+    --tahoe-icon-anim: tahoe-ic-shake;
+    animation: tahoe-ic-shake 0.45s ease-out;
+  }
 
+  /* draw the icon, hide Discord's */
   [aria-label="Threads" i] svg,
   [aria-label^="Notification Settings" i] svg,
   [aria-label="Pinned Messages" i] svg,
@@ -1006,12 +1093,12 @@ textarea[class*="textArea_"]:focus,
   [aria-label="Start Video Call" i] svg,
   [aria-label$="User Profile" i] svg,
   [aria-label="Mute" i] svg,
+  [aria-label="Deafen" i] svg,
+  [aria-label="User Settings" i] svg,
   [aria-label="Unmute" i] svg,
   [aria-label="Mute" i][aria-checked="true"] svg,
-  [aria-label="Deafen" i] svg,
   [aria-label="Undeafen" i] svg,
-  [aria-label="Deafen" i][aria-checked="true"] svg,
-  [aria-label="User Settings" i] svg {
+  [aria-label="Deafen" i][aria-checked="true"] svg {
     background-color: currentColor !important;
     -webkit-mask: var(--tahoe-icon) center / 100% 100% no-repeat;
     mask: var(--tahoe-icon) center / 100% 100% no-repeat;
@@ -1027,15 +1114,126 @@ textarea[class*="textArea_"]:focus,
   [aria-label="Start Video Call" i] svg > *,
   [aria-label$="User Profile" i] svg > *,
   [aria-label="Mute" i] svg > *,
+  [aria-label="Deafen" i] svg > *,
+  [aria-label="User Settings" i] svg > *,
   [aria-label="Unmute" i] svg > *,
   [aria-label="Mute" i][aria-checked="true"] svg > *,
-  [aria-label="Deafen" i] svg > *,
   [aria-label="Undeafen" i] svg > *,
-  [aria-label="Deafen" i][aria-checked="true"] svg > *,
-  [aria-label="User Settings" i] svg > * {
+  [aria-label="Deafen" i][aria-checked="true"] svg > * {
     opacity: 0 !important;
   }
+
+  /* hover, or switched on (open panel, member list shown): fill in */
+  [aria-label="Threads" i]:hover svg,
+  [aria-label^="Notification Settings" i]:hover svg,
+  [aria-label="Pinned Messages" i]:hover svg,
+  [aria-label="Pins" i]:hover svg,
+  [aria-label$="Member List" i]:hover svg,
+  [aria-label="Inbox" i]:hover svg,
+  [aria-label="Help" i]:hover svg,
+  [aria-label="Start Voice Call" i]:hover svg,
+  [aria-label="Start Video Call" i]:hover svg,
+  [aria-label$="User Profile" i]:hover svg,
+  [aria-label="Mute" i]:hover svg,
+  [aria-label="Deafen" i]:hover svg,
+  [aria-label="User Settings" i]:hover svg,
+  [aria-label="Unmute" i]:hover svg,
+  [aria-label="Mute" i][aria-checked="true"]:hover svg,
+  [aria-label="Undeafen" i]:hover svg,
+  [aria-label="Deafen" i][aria-checked="true"]:hover svg,
+  [aria-label="Threads" i][aria-expanded="true"] svg,
+  [aria-label^="Notification Settings" i][aria-expanded="true"] svg,
+  [aria-label="Pinned Messages" i][aria-expanded="true"] svg,
+  [aria-label="Pins" i][aria-expanded="true"] svg,
+  [aria-label$="Member List" i][aria-expanded="true"] svg,
+  [aria-label="Inbox" i][aria-expanded="true"] svg,
+  [aria-label="Help" i][aria-expanded="true"] svg,
+  [aria-label="Start Voice Call" i][aria-expanded="true"] svg,
+  [aria-label="Start Video Call" i][aria-expanded="true"] svg,
+  [aria-label$="User Profile" i][aria-expanded="true"] svg,
+  [aria-label="Mute" i][aria-expanded="true"] svg,
+  [aria-label="Deafen" i][aria-expanded="true"] svg,
+  [aria-label="User Settings" i][aria-expanded="true"] svg,
+  [aria-label="Unmute" i][aria-expanded="true"] svg,
+  [aria-label="Mute" i][aria-checked="true"][aria-expanded="true"] svg,
+  [aria-label="Undeafen" i][aria-expanded="true"] svg,
+  [aria-label="Deafen" i][aria-checked="true"][aria-expanded="true"] svg,
+  [aria-label="Threads" i][aria-pressed="true"] svg,
+  [aria-label^="Notification Settings" i][aria-pressed="true"] svg,
+  [aria-label="Pinned Messages" i][aria-pressed="true"] svg,
+  [aria-label="Pins" i][aria-pressed="true"] svg,
+  [aria-label$="Member List" i][aria-pressed="true"] svg,
+  [aria-label="Inbox" i][aria-pressed="true"] svg,
+  [aria-label="Help" i][aria-pressed="true"] svg,
+  [aria-label="Start Voice Call" i][aria-pressed="true"] svg,
+  [aria-label="Start Video Call" i][aria-pressed="true"] svg,
+  [aria-label$="User Profile" i][aria-pressed="true"] svg,
+  [aria-label="Mute" i][aria-pressed="true"] svg,
+  [aria-label="Deafen" i][aria-pressed="true"] svg,
+  [aria-label="User Settings" i][aria-pressed="true"] svg,
+  [aria-label="Unmute" i][aria-pressed="true"] svg,
+  [aria-label="Mute" i][aria-checked="true"][aria-pressed="true"] svg,
+  [aria-label="Undeafen" i][aria-pressed="true"] svg,
+  [aria-label="Deafen" i][aria-checked="true"][aria-pressed="true"] svg {
+    --tahoe-icon: var(--tahoe-icon-on);
+  }
+  /* hover: play the icon's animation */
+  [aria-label="Threads" i]:hover svg,
+  [aria-label^="Notification Settings" i]:hover svg,
+  [aria-label="Pinned Messages" i]:hover svg,
+  [aria-label="Pins" i]:hover svg,
+  [aria-label$="Member List" i]:hover svg,
+  [aria-label="Inbox" i]:hover svg,
+  [aria-label="Help" i]:hover svg,
+  [aria-label="Start Voice Call" i]:hover svg,
+  [aria-label="Start Video Call" i]:hover svg,
+  [aria-label$="User Profile" i]:hover svg,
+  [aria-label="Mute" i]:hover svg,
+  [aria-label="Deafen" i]:hover svg,
+  [aria-label="User Settings" i]:hover svg,
+  [aria-label="Unmute" i]:hover svg,
+  [aria-label="Mute" i][aria-checked="true"]:hover svg,
+  [aria-label="Undeafen" i]:hover svg,
+  [aria-label="Deafen" i][aria-checked="true"]:hover svg {
+    animation: var(--tahoe-icon-anim) 0.7s ease-in-out;
+  }
+
+  /* the DM / home button: a rose instead of Discord's logo */
+  :is([data-list-item-id="guildsnav___home"][class*="childWrapper_"], [data-list-item-id="guildsnav___home"] [class*="childWrapper_"]) {
+    background: var(--tahoe-fill-2) !important;
+    transition: background 0.25s;
+  }
+  [class*="blobContainer_"][class*="selected_"] :is([data-list-item-id="guildsnav___home"][class*="childWrapper_"], [data-list-item-id="guildsnav___home"] [class*="childWrapper_"]) {
+    background: linear-gradient(150deg, rgba(255, 232, 240, 0.92), rgba(234, 190, 207, 0.82)) !important;
+  }
+  :is([data-list-item-id="guildsnav___home"][class*="childWrapper_"], [data-list-item-id="guildsnav___home"] [class*="childWrapper_"]) > svg {
+    width: 34px !important;
+    height: 34px !important;
+    background: var(--tahoe-rose) center / contain no-repeat !important;
+    transform-origin: 50% 90%;
+    transition: scale 0.45s var(--tahoe-bounce);
+  }
+  :is([data-list-item-id="guildsnav___home"][class*="childWrapper_"], [data-list-item-id="guildsnav___home"] [class*="childWrapper_"]) > svg > * {
+    opacity: 0 !important;
+  }
+  [class*="blobContainer_"]:hover :is([data-list-item-id="guildsnav___home"][class*="childWrapper_"], [data-list-item-id="guildsnav___home"] [class*="childWrapper_"]) > svg {
+    scale: 1.08;
+    animation: tahoe-ic-sway 0.9s ease-in-out;
+  }
 }
+
+@keyframes tahoe-ic-ring { 0%, 100% { rotate: 0deg; } 15% { rotate: 16deg; } 30% { rotate: -13deg; } 45% { rotate: 9deg; } 60% { rotate: -6deg; } 75% { rotate: 3deg; } }
+@keyframes tahoe-ic-turn { from { rotate: 0deg; } to { rotate: 90deg; } }
+@keyframes tahoe-ic-pop { 0%, 100% { scale: 1; } 35% { scale: 1.2; } 65% { scale: 0.94; } }
+@keyframes tahoe-ic-hop { 0%, 100% { translate: 0 0; } 35% { translate: 0 -3px; } 65% { translate: 0 0.5px; } }
+@keyframes tahoe-ic-jiggle { 0%, 100% { rotate: 0deg; } 20% { rotate: -14deg; } 40% { rotate: 12deg; } 60% { rotate: -8deg; } 80% { rotate: 4deg; } }
+@keyframes tahoe-ic-bob { 0%, 100% { translate: 0 0; rotate: 0deg; } 40% { translate: 0 -3px; rotate: -10deg; } 70% { translate: 0 0.5px; rotate: 3deg; } }
+@keyframes tahoe-ic-dip { 0%, 100% { translate: 0 0; } 40% { translate: 0 2.5px; } 70% { translate: 0 -0.5px; } }
+@keyframes tahoe-ic-tilt { 0%, 100% { rotate: 0deg; } 40% { rotate: -16deg; } 70% { rotate: 5deg; } }
+@keyframes tahoe-ic-slide { 0%, 100% { translate: 0 0; } 40% { translate: 3px 0; } 70% { translate: -0.5px 0; } }
+@keyframes tahoe-ic-wobble { 0%, 100% { rotate: 0deg; } 25% { rotate: -10deg; } 50% { rotate: 8deg; } 75% { rotate: -4deg; } }
+@keyframes tahoe-ic-shake { 0%, 100% { translate: 0 0; } 20% { translate: -2px 0; } 40% { translate: 2px 0; } 60% { translate: -1.5px 0; } 80% { translate: 1px 0; } }
+@keyframes tahoe-ic-sway { 0%, 100% { rotate: 0deg; } 30% { rotate: -9deg; } 60% { rotate: 6deg; } 85% { rotate: -2deg; } }
 
 /* ==========================================================================
    Small things
