@@ -3,7 +3,7 @@
  * @author ElevenSoul
  * @source https://github.com/ElevenSoul/rose-glass
  * @description Liquid glass Discord in dusty rose: a floating glass dock and sidebar, Mac traffic lights, frosted message bubbles and springy animations. Follows Discord's light/dark setting.
- * @version 2.2.0
+ * @version 2.2.1
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap");
@@ -455,22 +455,26 @@ body {
   padding-top: var(--tahoe-top-safe) !important;
 }
 
-/* server banner: runs right up to the rounded top edge of the panel */
-:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="animatedContainer_"], [class*=" animatedContainer_"]),
-:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="bannerImage_"], [class*=" bannerImage_"]),
-:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="bannerImg_"], [class*=" bannerImg_"]) {
+/* server banner: runs right up to the rounded top edge of the panel.
+   Only for servers that have one: Discord keeps an empty banner box on every server. */
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) [class*="hasBanner_"] :is([class^="animatedContainer_"], [class*=" animatedContainer_"]),
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) [class*="hasBanner_"] :is([class^="bannerImage_"], [class*=" bannerImage_"]),
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) [class*="hasBanner_"] :is([class^="bannerImg_"], [class*=" bannerImg_"]) {
   top: 0 !important;
   width: 100% !important;
   height: calc(var(--custom-guild-banner-height, 130px) + var(--tahoe-top-safe)) !important;
   aspect-ratio: auto !important;
   object-fit: cover;
 }
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) :not([class*="hasBanner_"]) > :is([class^="animatedContainer_"], [class*=" animatedContainer_"]) {
+  display: none !important;
+}
 /* Discord's frosted strip behind the name on a banner: follow the taller name row */
-:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="headerGlass_"], [class*=" headerGlass_"]),
-:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="headerEllipseBackdrop_"], [class*=" headerEllipseBackdrop_"]) {
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) [class*="hasBanner_"] :is([class^="headerGlass_"], [class*=" headerGlass_"]),
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) [class*="hasBanner_"] :is([class^="headerEllipseBackdrop_"], [class*=" headerEllipseBackdrop_"]) {
   height: calc(var(--custom-channel-header-height, 48px) + var(--tahoe-top-safe) + 1px) !important;
 }
-:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="headerEllipseForeground_"], [class*=" headerEllipseForeground_"]) {
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) [class*="hasBanner_"] :is([class^="headerEllipseForeground_"], [class*=" headerEllipseForeground_"]) {
   translate: 0 var(--tahoe-top-safe);
 }
 
