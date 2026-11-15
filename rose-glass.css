@@ -3,7 +3,7 @@
  * @author ElevenSoul
  * @source https://github.com/ElevenSoul/rose-glass
  * @description Liquid glass Discord in dusty rose: a floating glass dock and sidebar, Mac traffic lights, frosted message bubbles and springy animations. Follows Discord's light/dark setting.
- * @version 2.1.0
+ * @version 2.1.1
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap");
@@ -424,7 +424,9 @@ body {
   margin: var(--tahoe-gap) 0 var(--tahoe-gap) var(--tahoe-gap) !important;
   /* line its top up with the dock, inside the title bar row */
   margin-top: calc(var(--tahoe-gap) - var(--custom-app-top-bar-height, 36px)) !important;
-  padding-top: 28px;
+  padding-top: 0 !important;
+  /* height of the strip at the top of the panel that drags the window */
+  --tahoe-top-safe: 24px;
   border: none !important;
   border-radius: var(--tahoe-radius) !important;
   overflow: hidden !important;
@@ -437,6 +439,36 @@ body {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
+}
+
+/* server name row: pushed below the window-drag strip so it stays clickable */
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) header:is([class^="header_"], [class*=" header_"]) {
+  box-sizing: border-box !important;
+  padding-top: var(--tahoe-top-safe) !important;
+  height: calc(var(--custom-channel-header-height, 48px) + var(--tahoe-top-safe)) !important;
+}
+/* Home: the DM search box gets the same clearance */
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="privateChannels_"], [class*=" privateChannels_"]) {
+  padding-top: var(--tahoe-top-safe) !important;
+}
+
+/* server banner: runs right up to the rounded top edge of the panel */
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="animatedContainer_"], [class*=" animatedContainer_"]),
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="bannerImage_"], [class*=" bannerImage_"]),
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="bannerImg_"], [class*=" bannerImg_"]) {
+  top: 0 !important;
+  width: 100% !important;
+  height: calc(var(--custom-guild-banner-height, 130px) + var(--tahoe-top-safe)) !important;
+  aspect-ratio: auto !important;
+  object-fit: cover;
+}
+/* Discord's frosted strip behind the name on a banner: follow the taller name row */
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="headerGlass_"], [class*=" headerGlass_"]),
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="headerEllipseBackdrop_"], [class*=" headerEllipseBackdrop_"]) {
+  height: calc(var(--custom-channel-header-height, 48px) + var(--tahoe-top-safe) + 1px) !important;
+}
+:is([class^="sidebarList_"], [class*=" sidebarList_"]) :is([class^="headerEllipseForeground_"], [class*=" headerEllipseForeground_"]) {
+  translate: 0 var(--tahoe-top-safe);
 }
 
 /* channel rows */
